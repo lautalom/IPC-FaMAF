@@ -1,0 +1,243 @@
+\documentclass{beamer}
+%
+% Choose how your presentation looks.
+%
+% For more themes, color themes and font themes, see:
+% http://deic.uab.es/~iblanes/beamer_gallery/index_by_theme.html
+%
+\mode<presentation>
+{
+  \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+  \usecolortheme{default} % or try albatross, beaver, crane, ...
+  \usefonttheme{default}  % or try serif, structurebold, ...
+  \setbeamertemplate{navigation symbols}{}
+  \setbeamertemplate{caption}[numbered]
+}
+
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+
+% Arrows
+\usepackage{amssymb}
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{darkgreen}{HTML}{22A63C}
+
+\lstset{
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,	                   % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  stringstyle=\color{darkgreen},   % string style
+  commentstyle=\color{gray},	   % comment style
+  language=C++,                    % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+\title[IPC]{Introducción a la programación comeptitiva}
+%\author{}
+%\institute{}
+\date{6 de Marzo, 2018}
+
+\begin{document}
+
+\begin{frame}{Qu\'e es la programación competitiva?}
+\begin{block}{Ejemplo}
+  Petya, Vasya and Tonya decidieron formar un equipo para participar en un concurso de programación. Durante el concurso, deben resolver varios problemas. Llegaron a un acuerdo de que sólo van a escribir una solución si al menos dos de ellos están seguros que es la correcta. Si no, no escriben una solución al problema.
+  El concurso tiene n problemas. Para cada problema, hay una única solución propuesta, y sabemos qué amigo esta seguro de que la solución es correcta. Ayuda a encontrar a cuántos problemas envían soluciones.
+\end{block}
+\pause
+\begin{block}{}
+En este ejemplo, la solución es trivial: para cada problema, si hay 2 seguros que es correcto, se escribe la solución y sumamos 1 a la respuesta final.
+\end{block}
+\end{frame}
+\begin{frame}{C++: Compilar y ejecutar}
+\begin{block}{Extension}
+Una extensión es .cc
+\end{block}
+\begin{block}{Compilar}
+Escribir en consola:\\
+\ \ g++ -o nombre\_del\_ejecutable nombre\_del\_archivo\\
+Ejemplo: para compilar el archivo test.cc\\
+\ \ g++ -o test test.cc
+\end{block}
+\begin{block}{Ejecutar}
+Escribir en consola: ./nombre\_del\_ejecutable\\
+Ejemplo:\\
+\ \ ./test
+\end{block}
+\end{frame}
+
+\begin{frame}{C++: Escanear y Printear}
+  \begin{block}{Comparado con C}
+    \ \ scanf $\rightarrow$ cin\\
+    \ \ printf $\rightarrow$ cout
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Probando escribir código}
+  \begin{lstlisting}
+
+    #include <iostream>
+    using namespace std;
+    int main() {
+      ios::sync_with_stdio(false);
+      int n;
+      cout << "ingrese un numero" << endl;
+      cin >> n;
+      cout << "tu numero es:" << n << endl;
+    }
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame} {Volviendo al ejemplo}
+  \begin{block}{}
+ Petya, Vasya and Tonya decidieron formar un equipo para participar en un concurso de programación. Durante el concurso, deben resolver varios problemas. Llegaron a un acuerdo de que sólo van a escribir una solución si al menos dos de ellos están seguros que es la correcta. Si no, no escriben una solución al problema.
+  El concurso tiene n problemas. Para cada problema, hay una única solución propuesta, y sabemos qué amigo esta seguro de que la solución es correcta. Ayuda a encontrar a cuántos problemas envían soluciones.\\
+  \end{block}
+  
+  \begin{block}{Input}
+  La primera línea de input contiene un único número entero n (1 ≤ n ≤ 1000). Luego, siguen n líneas con 3 enteros cada una. Cada entero es un 0 o es un 1. Si el primer número en la línea es un 1, entonces Petya está segura que la solución es correcta, en caso contrario no lo esta. El segundo número refleja la opinión de Vasya, y el tercero el de Tonya. Los números están separados por espacios.\\
+  \end{block}
+  
+\end{frame}
+
+\begin{frame} {Volviendo al ejemplo}
+  \begin{block}{}
+ Petya, Vasya and Tonya decidieron formar un equipo para participar en un concurso de programación. Durante el concurso, deben resolver varios problemas. Llegaron a un acuerdo de que sólo van a escribir una solución si al menos dos de ellos están seguros que es la correcta. Si no, no escriben una solución al problema.
+  El concurso tiene n problemas. Para cada problema, hay una única solución propuesta, y sabemos qué amigo esta seguro de que la solución es correcta. Ayuda a encontrar a cuántos problemas envían soluciones.\\
+  \end{block}
+   
+  \begin{block}{Output}
+  Imprime un único número: La cantidad de problemas para los cuales van a escribir soluciones.
+
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Escribiendo el código}
+  \begin{lstlisting}
+    #include <iostream>
+    using namespace std;
+
+    int main() {
+        ios::sync_with_stdio(false);
+        int i, n, Petya, Vasya, Tonya, result=0;
+        cin >> n;
+        for (i = 0; i < n; i++)  {
+            cin >> Petya >> Vasya >> Tonya;
+            if (Petya + Vasya + Tonya >= 2)
+                result++;
+        }
+        cout << result << endl;
+    }
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Códigos alternativos (1)}
+  \begin{lstlisting}
+#include <iostream>
+using namespace std;
+
+int main() {
+  int i, n, a, b, c, res=0;
+  cin >> n;
+  for (i = 0; i < n; i++)  {
+    cin >> a >> b >> c;
+    if ((a==1 && b==1) || (a==1 && c == 1) || (b==1&&c==1) || (a==1&&b==1&&c==1)) {
+	    res++;
+    } else {
+    	res = res;
+    }
+  }
+  cout << res << endl;
+}
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Códigos alternativos (2)}
+  \begin{lstlisting}
+    #include <iostream>
+    using namespace std;
+
+    int main() {
+    ios::sync_with_stdio(false);
+    int i, n, a, b, c, res=0;
+    cin >> n;
+    for (i = 0; i < n; i++)  {
+      cin >> a >> b >> c;
+      if ((a&&b)||(a&&c)||(b&&c)||(a&&b&&c)) {            
+      	res++;
+      }
+    }
+    cout << res << endl;
+    }
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Códigos alternativos (3)}
+  \begin{lstlisting}
+    #include <stdio.h>
+
+    int main() {
+      int n, p, v, t, res=0;
+      scanf("%d", &n);
+      while(n--)  {
+          scanf("%d %d %d", &p, &v, &t);
+          if (p + v + t >= 2)
+              res++;
+      }
+      printf("%d\n", res);
+    }
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}{¿Cómo puedo practicar?}
+	\includegraphics[width=\textwidth]{codeforces1}
+\end{frame}
+\begin{frame}{¿Cómo puedo practicar?}
+	\includegraphics[width=\textwidth]{codeforces2}
+\end{frame}
+\begin{frame}{¿Cómo puedo practicar?}
+	\includegraphics[width=\textwidth]{codeforces3}
+\end{frame}
+\begin{frame}{¿Cómo puedo practicar?}
+	\includegraphics[width=\textwidth]{codeforces4}
+\end{frame}
+\begin{frame}{¿Cómo puedo practicar?}
+	\includegraphics[width=\textwidth]{codeforces5}
+\end{frame}
+
+\begin{frame}{}
+  \begin{block}{Consultas}
+	Ezekiel Carranza - ezekielcarranza@gmail.com\\
+    Matías Hunicken - matihunicken@gmail.com\\
+    Marcos Kolodny - marcoskolodny@gmail.com\\
+    Sebastián Marín - sebamarin2@gmail.com\\
+    Martín Rodriguez - tinrodriguez8@gmail.com\\
+  \end{block}
+\end{frame}
+
+
+\end{document}
